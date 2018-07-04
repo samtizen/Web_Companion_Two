@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<title>Circular UI</title>
+	<link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.min.css">
+	<link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="lib/tau/wearable/theme/default/tau.circle.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<!-- Main page -->
+<div class="ui-page ui-page-active" id="main">
+	<header class="ui-header">
+		<h2 class="ui-title">ZGuide</h2>
+	</header>
+	<div class="ui-content">
+		<button type="button" class="ui-more">More Options</button>
+		<textarea class="ui-text-input" type="text" placeholder="Enter a stroll name"></textarea>
+	</div>
+	<footer class="ui-footer ui-bottom-button ui-fixed">
+		<a href="#guide-tracker-page" class="ui-btn ui-start-tracker-btn">START</a>
+	</footer>
+</div>
+<!-- Guide tracker page -->
+<div class="ui-page" id="guide-tracker-page" data-enable-page-scroll="false">
+	<div id="hsectionchanger" class="ui-content">
+		<div>
+			<section class="ui-section-active">
+				<div class="ui-header">
+					<div class="ui-title">Guide Tracker</div>
+				</div>
+				<div class="ui-content">
+				</div>
+				<div class="ui-footer ui-bottom-button ui-fixed ui-set-width-50">
+					<a href="#main" class="ui-btn ui-close-tracker-btn">CLOSE</a>
+				</div>
+				<div class="ui-side-btn ui-right-side-btn">
+					&#10093;
+				</div>
+				<div class="ui-circle-lg-btn add-place-btn"><div class="add-icon"></div></div>
+			</section>
+			<section style="text-align:center">
+				<div class="ui-header ui-header-custom-list">
+					<div class="ui-title">Places By Distance</div>
+				</div>
+				<div class="ui-content">
+					<ul class="ui-listview ui-ordered-place-list"></ul>
+				</div>
+				<!--<div class="ui-footer ui-bottom-button ui-fixed ui-set-width-50">
+					<a href="" class="ui-btn ui-undo-tracker-btn">UNDO</a>
+				</div>-->
+				<div class="ui-side-btn ui-left-side-btn" style="vertical-align: middle;">
+					&#10092;
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!-- Action options popup -->
+<div id="action-options-popup-id" class="ui-popup">
+	<div id="action-selector-id" class="ui-selector">
+		<div class="ui-item ui-selector-circle-back-item back2main-btn" data-title="Back"><div class="ui-selector-circle-icon-back-item back-icon"></div></div>
+		<div class="ui-item ui-selector-circle-item send-stroll-btn" data-title="Send to device"><div class="ui-selector-circle-icon-item send-icon"></div></div>
+		<div class="ui-item ui-selector-circle-item remove-stroll-btn" data-title="Remove"><div class="ui-selector-circle-icon-item delete-icon"></div></div>
+	</div>
+</div>
+<!-- Place detail popup -->
+<div id="place-detail-popup-id" class="ui-popup" data-role="popup">
+	<div class="ui-popup-content">
+		<textarea class="ui-text-input" type="text" placeholder="Enter a place name"></textarea>
+	</div>
+	<div class="ui-footer ui-grid-col-2 ui-fixed ui-underneath">
+		<a href="#" class="ui-btn" id="place-detail-popup-save-btn" data-rel="back">
+			<span class="save-icon popup-info-save-status-icon"></span>
+			<span class="ui-save-status-label">Save</span>
+		</a>
+		<a href="#" class="ui-btn" id="place-detail-popup-back-btn" data-rel="back">BACK</a>
+	</div>
+</div>
+<!-- User content popup -->
+<div id="load-popup-id" class="ui-popup">
+	<div class="ui-popup-header">User consent</div>
+	<div class="ui-popup-content">
+		Agree?
+		<br>Some device wants to load a new stroll to your watch.
+		<br>The current stroll will be removed.
+	</div>
+	<div class="ui-popup-footer ui-side-button ui-grid-col-2">
+		<a id="btn-load-popup-cancel" href="#" class="ui-btn btn-icon-cancel" data-rel="back">Cancel</a>
+		<a id="btn-load-popup-ok" href="#" class="ui-btn btn-icon-check" data-rel="back">OK</a>
+	</div>
+</div>
+<script src="lib/jquery.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="lib/geolib.js"></script>
+<script src="lib/tau/wearable/js/tau.min.js"></script>
+<script src="js/main.section-changer.js"></script>
+<script src="js/main.tizen.js"></script>
+<script src="js/battery-checker.js"></script>
+<script src="lib/moreoptions.js"></script>
+<script src="js/service.sap.consumer.place-tracker.js"></script>
+<script src="js/data.place-tracker.test.js"></script>
+<script src="js/model.place-tracker.js"></script>
+<script src="js/storage.place-tracker.js"></script>
+<script src="js/main.place-tracker.js"></script>
+<script>
+	stroller.init(sights);
+</script>
+</body>
+</html>
+
