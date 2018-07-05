@@ -4,14 +4,14 @@
  * File Created: Sunday, 1st July 2018 8:16:48 pm
  * Author: Sergei Papulin
  * -----
- * Last Modified: Thursday, 5th July 2018 12:11:18 am
+ * Last Modified: Thursday, 5th July 2018 2:53:39 pm
  * Modified By: Sergei Papulin
  * -----
  * Copyright 2018 Sergei Papulin, Zighter
  */
 
 var stroller = (function($, serviceConsumer) {
-    
+     
     var mainTracker = {},
         stroll = null,
         pathItem = null,
@@ -41,7 +41,7 @@ var stroller = (function($, serviceConsumer) {
         // -------------------------------------
         // Main Page
         $(".ui-start-tracker-btn").click(function() {
-            // TODO: start HAM
+            // Start HAM
             startHAM();
             //pathItem = new PathItem(); // for multiple path items
             //stroll.addPathItem(pathItem);
@@ -62,15 +62,12 @@ var stroller = (function($, serviceConsumer) {
         });
         // 1) Creator Section
         $(".add-place-btn").click(function() {
-            // TODO: open the place detail popup with empty form
-
-            // TODO: open loading indicator
+            // Open the place detail popup with empty form
+            // TODO: Open loading indicator
 
             getCurrentLocation(function(location) {
-
                 // TODO: close loading indicator
-
-                // TODO: get a current position and save it
+                // Get a current position and save it
                 var point = {
                     lat: location.latitude,
                     lng: location.longitude
@@ -79,24 +76,21 @@ var stroller = (function($, serviceConsumer) {
                 renderDetailPopupContent(point);
                 tau.openPopup("#place-detail-popup-id");
 
-                //var place = new Place({name: "name", type: 1,  point: point});
-                //stroll.addPlace(place);
-
             });
 
         });
         $(".ui-close-tracker-btn").click(function () {
-            // TODO: Stop HAM
-            // TODO: Save results
+            // Stop HAM
             stopHAM();
+            // TODO: Save results
         });
 
         // 2) Place List Section
         $("#stroll").on("click", ".ui-place-item", function() {
-            // TODO: get the item id //var placeId = $(this).data("id");
+            // Get the item id //var placeId = $(this).data("id");
             // TODO: open the place detail popup
-            // renderInfoPopupContent(strollPlaces.getById(placeId));
-            // tau.openPopup("#place-info-popup-id");
+            // renderPlaceDetailPopupContent(stroll.getPlaceById(placeId));
+            // tau.openPopup("#place-detail-popup-id");
         });
 
         // -------------------------------------
@@ -104,13 +98,12 @@ var stroller = (function($, serviceConsumer) {
         // -------------------------------------
         // Action Popup
         $(".back2main-btn").click(function(){
-            // TODO: close the action popup
+            // Close the action popup
             tau.closePopup("#action-options-popup-id");
         });
         $(".send-stroll-btn").click(function() {
 
-            // TODO: send the stroll to a device
-
+            // Send the stroll to a device
             if (serviceConsumer.isBound() === false) serviceConsumer.init(JSON.stringify(stroll));
             else serviceConsumer.sendData(JSON.stringify(stroll));
 
@@ -118,7 +111,7 @@ var stroller = (function($, serviceConsumer) {
 
         });
         $(".remove-stroll-btn").click(function() {
-            // TODO: remove the stroll
+            // Remove the stroll
             stroll = new Stroll();
             pathItem = new PathItem(); // for one path item
             stroll.addPathItem(pathItem);
@@ -154,7 +147,7 @@ var stroller = (function($, serviceConsumer) {
             stroll.addPlace(place);
         });
 
-        // Consent Popup ????
+        // Consent Popup
         $("#btn-load-popup-ok").click(function() {
         });
         $("#btn-load-popup-cancel").click(function() {
@@ -184,8 +177,7 @@ var stroller = (function($, serviceConsumer) {
         function onChangedGPSCallback(locationPoints) {
             console.log(locationPoints);
 
-            // TODO: save point to path object
-
+            // Save point to path object
             var i = 0,
                 lenPoints = locationPoints.gpsInfo.length;
 
@@ -251,9 +243,7 @@ var stroller = (function($, serviceConsumer) {
                     message = "An unknown error occurred.";
                     break;
             }
-
             //renderInfoPopupText(message);
-
             //setStopStateTracker();
         }
     }
@@ -278,15 +268,6 @@ var stroller = (function($, serviceConsumer) {
     // Main Page
 
     // Guide Tracker Page
-    
-    // -------------------------------------
-    // POPUPS
-    // -------------------------------------
-    // Action Popup
-        
-    // Detail Popup
-
-    // Consent Popup
     function renderPlaceListContent(places) {
 
         var htmlList = "",
@@ -306,10 +287,18 @@ var stroller = (function($, serviceConsumer) {
         $(".ui-ordered-place-list").html(htmlList);
 
     }
+    // -------------------------------------
+    // POPUPS
+    // -------------------------------------
+    // Action Popup
+        
+    // Detail Popup
     function renderDetailPopupContent(place) {
         $("#place-detail-popup-id").data("location", place);
         $("#place-detail-popup-id").find(".ui-text-input").val("");
     }
+
+    // Consent Popup
 
     return mainTracker;
 
